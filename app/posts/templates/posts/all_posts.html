@@ -7,7 +7,7 @@
 
 <h1>Posts page</h1>
 <br>
-<div class="d-flex justify-content-center align-items-center">
+<div>
     <div class="mt-4">
         <table class="table mb-4 text-center">
             <thead>
@@ -20,19 +20,22 @@
                     <th scope="col">Date</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody style="vertical-align: middle;">
                 {% for post in posts %}
                 <tr>
                     <td>
-                        <a href="{{ url_for('posts.post', post_id=post.id) }}">{{ post.title }}</a>
+                        {{ post.id }}</a>
+                    </td>
+                    <td>
+                        <a href="{{ url_for('posts.post', id=post.id) }}">{{ post.title }}</a>
                     </td>
    
                     <td>
-                        <img alt="..." class="img-fluid rounded shadow-lg" src="{{ url_for('static', filename='images/' + post.image_file) }}" style="width: 10%; height: 10%;">
+                        <img alt="..." class="img-fluid rounded shadow-lg" src="{{ url_for('static', filename='images/' + post.image_file) }}" style="width: 150px; height: 150px;">
                     </td>
 
                     <td>
-                        {{post.text}}
+                        {{ post.text[:33] }}{% if post.text|length > 0 %}...{% endif %}
                     </td>
 
                     <td> 

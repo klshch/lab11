@@ -21,3 +21,21 @@ class CreatePost(FlaskForm):
     submit = SubmitField('Create',
                          render_kw={"class": "btn btn-primary"})  
     
+
+
+class EditPostForm(FlaskForm):
+    title = StringField('Title:',
+                        validators=[DataRequired("This field is required.")],
+                        render_kw={"class": "form-control"})
+    text = TextAreaField('Write your post:', 
+                         validators=[DataRequired("This field is required.")],
+                         render_kw={"class": "form-control"})
+    type = SelectField("Post type:", 
+                       validators=[DataRequired("Select a type.")],
+                       choices=[("news", "News"), ("publication", "Publication"), ("other", "Other")],
+                       render_kw={"class": "form-control", "multiple": True})
+    image_file = FileField('Change image:', 
+                           validators=[FileAllowed(['jpg', 'png'])],
+                           render_kw={"class": "form-control"})
+    submit = SubmitField('Submit',
+                         render_kw={"class": "btn btn-primary"})  
